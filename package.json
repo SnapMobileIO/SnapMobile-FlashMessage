@@ -1,8 +1,8 @@
 {
-  "name": "snapmobile-admin",
+  "name": "snapmobile-flashmessage",
   "version": "1.0.0",
   "description": "",
-  "main": "snapmobile-admin.js",
+  "main": "snapmobile-flashmessage.js",
   "scripts": {
     "test": "mocha --recursive",
     "build": "babel server -d dist/server",
