@@ -21,12 +21,14 @@ class FlashMessage {
   }
 
   // Success message displays message set in controllers  - green background
-  success(message) {
-    this.ngNotify.set(message, 'success');
+  success(message, target = 'body') {
+    this.ngNotify.set(message, 'success', {
+      target: target
+    });
   }
 
   // Error message lists validation errors - red background
-  errors(err) {
+  errors(err, target = 'body') {
     let errors = err.data.errors;
     for (let key in errors) {
       let message = errors[key].message;
@@ -37,7 +39,9 @@ class FlashMessage {
       this.messages = this.messages.join(' ');
     }
 
-    this.ngNotify.set('<ul>' + this.messages + '</ul>', 'error');
+    this.ngNotify.set('<ul>' + this.messages + '</ul>', 'error', {
+      target: target
+    });
     this.messages = [];
 
   }
