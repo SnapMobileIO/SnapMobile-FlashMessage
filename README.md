@@ -10,7 +10,25 @@ To configure, add the following to `app.js`:
 
     import 'snapmobile-flashmessage';
     
-Finally, add 'adminApp' as a dependency for the angular app.
+Finally, add 'FlashMessageModule' as a dependency for the angular app.
+
+To use in your code, include `FlashMessage` as a dependency and then call:
+
+```javavascript
+this.FlashMessage.success('Successfully created');
+```
+
+or 
+
+```javavascript
+this.FlashMessage.errors('Successfully created');
+```
+
+Optionally, you can include a target div to attach the message to (default is `body`)…
+
+```javavascript
+this.FlashMessage.success('Successfully created', 'flash-message');
+```
 
 # Updating
 
