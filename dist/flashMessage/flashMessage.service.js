@@ -16,10 +16,11 @@ var FlashMessage = function () {
    * disappear after 3 seconds - these can be set in the config
   */
 
-  function FlashMessage(ngNotify) {
+  function FlashMessage(ngNotify, _) {
     _classCallCheck(this, FlashMessage);
 
     this.ngNotify = ngNotify;
+    this._ = _;
     this.ngNotify.config({
       theme: 'pure',
       position: 'top',
@@ -37,7 +38,11 @@ var FlashMessage = function () {
   _createClass(FlashMessage, [{
     key: 'success',
     value: function success(message) {
-      this.ngNotify.set(message, 'success');
+      var target = arguments.length <= 1 || arguments[1] === undefined ? 'body' : arguments[1];
+
+      this.ngNotify.set(message, 'success', {
+        target: target
+      });
     }
 
     // Error message lists validation errors - red background
@@ -45,17 +50,21 @@ var FlashMessage = function () {
   }, {
     key: 'errors',
     value: function errors(err) {
+      var target = arguments.length <= 1 || arguments[1] === undefined ? 'body' : arguments[1];
+
       var errors = err.data.errors;
       for (var key in errors) {
         var message = errors[key].message;
-        this.messages.push('<li>' + message + '</li>');
+        this.messages.push('<li>' + this._.escape(message) + '</li>');
       }
 
       if (this.messages.length > 1) {
         this.messages = this.messages.join(' ');
       }
 
-      this.ngNotify.set('<ul>' + this.messages + '</ul>', 'error');
+      this.ngNotify.set('<ul>' + this.messages + '</ul>', 'error', {
+        target: target
+      });
       this.messages = [];
     }
   }]);

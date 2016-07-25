@@ -7,8 +7,9 @@ class FlashMessage {
    * Current configurations show notifications at top of page and
    * disappear after 3 seconds - these can be set in the config
   */
-  constructor(ngNotify) {
+  constructor(ngNotify, _) {
     this.ngNotify = ngNotify;
+    this._ = _;
     this.ngNotify.config({
               theme: 'pure',
               position: 'top',
@@ -32,7 +33,7 @@ class FlashMessage {
     let errors = err.data.errors;
     for (let key in errors) {
       let message = errors[key].message;
-      this.messages.push('<li>' + message + '</li>');
+      this.messages.push('<li>' + this._.escape(message) + '</li>');
     }
 
     if (this.messages.length > 1) {
